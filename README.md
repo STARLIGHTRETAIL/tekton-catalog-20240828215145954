@@ -1,148 +1,179 @@
-# Open-Toolchain Tekton Catalog
+<div align="center">
 
-Catalog of [Tekton Tasks](https://tekton.dev/docs/pipelines/tasks/#overview) usable in [Continuous Delivery Tekton Pipelines](https://cloud.ibm.com/docs/services/ContinuousDelivery?topic=ContinuousDelivery-tekton-pipelines)
+# tekton-catalog-20240828215145954
 
-**Notes**:
-- These tasks are usable with Continuous Delivery Tekton Pipeline Worker Agent (Tekton definition with apiVersion: v1beta1). These tasks have been updated  following migration path described in https://github.com/tektoncd/pipeline/blob/v0.11.2/docs/migrating-v1alpha1-to-v1beta1.md
-- If you want `v1alpha1` resources, you need to reference the [`tekton_pipeline0.10.1`](https://github.com/open-toolchain/tekton-catalog/releases/tag/tekton_pipeline0.10.1) tag (or
-[`tekton_pipeline0.10.1_workspace`](https://github.com/open-toolchain/tekton-catalog/releases/tag/tekton_pipeline0.10.1_workspace) tag to have `v1alpha1` resources using workspaces).
-- When moving from from tag `tekton_pipeline0.10.1`, `tekton_pipeline0.10.1` and/or branch `tkn_v1beta1` to use `master`branch of this catalog, take a look at [breaking changes section](./README.md#breaking-changes)
+[![GitHub stars](https://img.shields.io/github/stars/StarlightRetail/tekton-catalog-20240828215145954?style=for-the-badge&logo=github&colorB=blue)](https://github.com/STARLIGHTRETAIL/tekton-catalog-20240828215145954/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/StarlightRetail/tekton-catalog-20240828215145954?style=for-the-badge&logo=github&colorB=cyan)](https://github.com/STARLIGHTRETAIL/tekton-catalog-20240828215145954/network/members)
+[![GitHub issues](https://img.shields.io/github/issues/StarlightRetail/tekton-catalog-20240828215145954?style=for-the-badge&logo=github&colorB=yellow)](https://github.com/STARLIGHTRETAIL/tekton-catalog-20240828215145954/issues)
+[![License](https://img.shields.io/github/license/StarlightRetail/tekton-catalog-20240828215145954?style=for-the-badge&colorB=green)](https://github.com/STARLIGHTRETAIL/tekton-catalog-20240828215145954/blob/main/LICENSE)
+[![Last Commit](https://img.shields.io/github/last-commit/StarlightRetail/tekton-catalog-20240828215145954?style=for-the-badge&logo=git&colorB=purple)](https://github.com/STARLIGHTRETAIL/tekton-catalog-20240828215145954/commits)
+[![Shell](https://img.shields.io/badge/Shell-89E051?style=for-the-badge&logo=shell&logoColor=white)](#)
 
-# Tasks
+<p align="center">
+<a href="https://github.com/STARLIGHTRETAIL/tekton-catalog-20240828215145954"><img src="https://img.shields.io/badge/View_on_GitHub-181717?style=for-the-badge&logo=github&logoColor=white" alt="View on GitHub" /></a>
+<a href="https://github.com/STARLIGHTRETAIL/tekton-catalog-20240828215145954/issues/new"><img src="https://img.shields.io/badge/Report_Bug-FF0000?style=for-the-badge&logo=github&logoColor=white" alt="Report Bug" /></a>
+<a href="https://github.com/STARLIGHTRETAIL/tekton-catalog-20240828215145954/issues/new?labels=enhancement"><img src="https://img.shields.io/badge/Request_Feature-0080FF?style=for-the-badge&logo=github&logoColor=white" alt="Request Feature" /></a>
+</p>
 
-## Cloud Foundry related tasks
+<br/>
 
-- **[cf-deploy-app](./cloudfoundry/README.md)**: This task allows to perform a deployment of a Cloud Foundry application using `ibmcloud cf` commands.
+*Part of the [StarlightRetail](https://github.com/StarlightRetail) organization*
 
-## IBM Cloud Container Registry related tasks
+---
 
-- **[icr-containerize](./container-registry/README.md#icr-containerize)**: This task is building and pushing an image to [IBM Cloud Container Registry](https://cloud.ibm.com/docs/services/Registry?topic=registry-getting-started). This task is relying on [Buildkit](https://github.com/moby/buildkit) to perform the build of the image.
-- **[icr-execute-in-dind](./container-registry/README.md#icr-execute-in-dind)**: This task runs `docker` commands (build, inspect...) that communicate with a sidecar dind, and push the resulting image to the [IBM Cloud Container Registry](https://cloud.ibm.com/docs/services/Registry?topic=registry-getting-started).
-- **[icr-execute-in-dind-cluster](./container-registry/README.md#icr-execute-in-dind-cluster)**: This task runs `docker` commands (build, inspect...) that communicate with a docker dind instance hosted in a kubernetes cluster (eventually deploying the Docker DinD if needed), and pushes the resulting image to the [IBM Cloud Container Registry](https://cloud.ibm.com/docs/services/Registry?topic=registry-getting-started).
-- **[icr-check-va-scan](./container-registry/README.md#icr-check-va-scan)**: This task is verifying that a [Vulnerability Advisor scan](https://cloud.ibm.com/docs/services/Registry?topic=va-va_index) has been made for the image and process the outcome of the scan.
+</div>
 
-- **[icr-cr-build - deprecated](./container-registry/README.md#icr-cr-build)**:  The [`ibmcloud cr build`](https://cloud.ibm.com/docs/container-registry-cli-plugin?topic=container-registry-cli-plugin-containerregcli#bx_cr_build) command is deprecated. If you use the [icr-cr-build](./container-registry/README.md#icr-cr-build) Tekton task, you can migrate to one of the three above Tekton tasks to build container images. For more information about this replacement, see the [IBM Cloud™ Container Registry is Deprecating Container Builds](https://www.ibm.com/cloud/blog/announcements/ibm-cloud-container-registry-deprecating-container-builds) blog post.
+# STARLIGHTRETAIL/tekton-catalog-20240828215145954  
+*A curated collection of Tekton tasks for Continuous Delivery pipelines*
 
-## IBM Cloud Code Risk Analyzer scanners related tasks
+## Overview  
 
-- **[cra-discovery](./cra/README.md#cra-discovery)**: This task accesses various source artifacts from the repository and performs deep discovery to identify all dependencies (including transitive dependencies).
-- **[cra-bom](./cra/README.md#cra-bom)**: This task creates a Bill-of-Material (BoM) for a given repository that captures pedigree of all the dependencies and is collected at different granularities.
-- **[cra-cis-check](./cra/README.md#cra-cis-check)**: This task runs configuration checks on kubernetes deployment manifests.
-- **[cra-vulnerability-remediation](./cra/README.md#cra-vulnerability-remediation)**: This task finds out vulnerabilities for all application package dependencies, container base images and os packages.
-- **[cra-comm-editor](./cra/README.md#cra-comm-editor)**: This task creates comments on Pull Requests and opens issues regarding bill of material and discovered vunerabilities.
-- **[cra-terraform-scan](./cra/README.md#cra-terraform-scan)**: ## This task scans ibm-terraform-provider files for compliance issues.
+The `tekton-catalog-20240828215145954` repository, developed by **StarlightRetail**, serves as a centralized catalog for reusable [Tekton Tasks](https://tekton.dev/docs/pipelines/tasks/#overview). These tasks are specifically designed to facilitate the implementation of robust, scalable Continuous Delivery pipelines within IBM Cloud and other environments.  
+
+This catalog offers a comprehensive toolkit to handle critical CI/CD operations, including application deployment, Docker image management, vulnerability analysis, and more. With predefined tasks tailored for Cloud Foundry applications and IBM Cloud Container Registry, development teams can streamline their DevOps processes without needing to define everything from scratch.  
+
+Whether you're building cloud-native applications or deploying containerized workloads, this repository empowers developers to accelerate their software delivery lifecycle through reliable and reusable Tekton assets.  
+
+## Key Features  
+
+- **Cloud Foundry Application Deployment**: Automate application deployment using `ibmcloud cf` commands.  
+- **Containerization Support**: Build and push Docker images to the IBM Cloud Container Registry using [BuildKit](https://github.com/moby/buildkit).  
+- **Docker-in-Docker (DinD) Execution**: Execute Docker commands in isolated DinD environments, including cluster-based setups.  
+- **Vulnerability Analysis**: Validate the security of container images using IBM Cloud Vulnerability Advisor scans.  
+- **Prebuilt Tekton Task Catalog**: Multiple Tekton pipeline resources for common CI/CD scenarios.  
+
+## Tech Stack  
+
+| Technology               | Description                                                     |  
+|--------------------------|-----------------------------------------------------------------|  
+| **Shell**                | Primary language for all scripts and task definitions          |  
+| **Tekton Pipelines**     | Kubernetes-based CI/CD pipelines framework                     |  
+| **IBM Cloud CLI Tools**  | Command-line tools for IBM Cloud resource management           |  
+| **Docker/DinD**          | Docker and Docker-in-Docker instances for container tasks      |  
+
+## Getting Started  
+
+Follow these steps to set up and get started with the `tekton-catalog-20240828215145954` repository:  
+
+### Prerequisites  
+
+1. **Tekton Pipelines**: Ensure Tekton is installed on your Kubernetes cluster. Follow [Tekton installation instructions](https://tekton.dev/docs/getting-started/).  
+2. **IBM Cloud CLI**: Install the IBM Cloud CLI along with any required plugins (e.g., `cf`, `cr`).  
+   ```bash  
+   curl -fsSL https://clis.cloud.ibm.com/install/linux | sh  
+   ibmcloud plugin install cf  
+   ibmcloud plugin install container-registry  
+   ```  
+3. **Kubernetes Cluster**: Access to a Kubernetes environment with sufficient permissions.  
+
+### Installation  
+
+1. Clone the repository:  
+   ```bash  
+   git clone https://github.com/STARLIGHTRETAIL/tekton-catalog-20240828215145954.git  
+   cd tekton-catalog-20240828215145954  
+   ```  
+
+2. Set up the Tekton tasks in your Kubernetes cluster:  
+   ```bash  
+   kubectl apply -f .ci/ci-pipeline.yaml  
+   kubectl apply -f .ci/pr-pipeline.yaml  
+   kubectl apply -f container-registry/task-containerize.yaml  
+   ```  
+
+### Basic Usage  
+
+Run a sample Tekton pipeline for deploying a Cloud Foundry application:  
+
+1. Apply task-specific YAML:  
+   ```bash  
+   kubectl apply -f cloudfoundry/task-deploy-app.yaml  
+   ```  
+
+2. Trigger deployment pipeline:  
+   ```bash  
+   kubectl create -f cloudfoundry/sample-cf-app/pipeline-cf-app.yaml  
+   ```  
+
+3. Monitor the pipeline execution:  
+   ```bash  
+   kubectl get pipelineruns --watch  
+   ```  
+
+## Project Structure  
+
+The repository is organized as follows:  
+
+```
+├── .ci/                     # CI/CD configuration files  
+├── cloudfoundry/            # Tasks and templates related to Cloud Foundry deployment  
+├── container-registry/      # Tasks for IBM Cloud Container Registry and Docker integration  
+├── cra/                     # Tasks for Continuous Retrospective Analysis (CRA)  
+├── LICENSE                  # Apache License 2.0  
+├── README.md                # Project documentation  
+```  
+
+### Key Directories  
+
+- **`.ci/`**: Contains YAML definitions for CI and PR pipelines, listeners, and triggers.  
+- **`cloudfoundry/`**: Enables deployment scenarios for Cloud Foundry applications.  
+- **`container-registry/`**: Supports tasks like image building, vulnerability scanning, and Docker-in-Docker execution.  
+- **`cra/`**: Includes resources for maintaining continuous analysis workflows.  
+
+## Usage  
+
+Below is an example of running the `icr-containerize` task to build and push an image to IBM Cloud Container Registry:  
+
+1. Configure Docker authentication and IBM Cloud credentials in your Kubernetes cluster using secrets.  
+2. Apply the task:  
+   ```bash  
+   kubectl apply -f container-registry/task-containerize.yaml  
+   ```  
+3. Use the task in a pipeline:  
+   ```yaml  
+   apiVersion: tekton.dev/v1beta1  
+   kind: Pipeline  
+   metadata:  
+     name: containerize-example  
+   spec:  
+     tasks:  
+       - name: icr-containerize  
+         taskRef:  
+           name: containerize  
+         params:  
+           - name: image  
+             value: "us.icr.io/my-namespace/my-image:latest"  
+   ```  
+
+Execute the pipeline:  
+```bash  
+kubectl apply -f container-registry/sample/pipeline-buildkit-no-image-url.yaml  
+```  
+
+## Contributing  
+
+We welcome contributions to improve the repository and its tasks. To contribute to the `tekton-catalog-20240828215145954` repository, please:  
+
+1. Fork the repository within your GitHub account.  
+2. Create a feature or bug fix branch.  
+3. Submit a pull request with a detailed description of your changes.  
+
+Contributions must comply with **StarlightRetail**'s coding standards and should ensure backward compatibility wherever possible.  
+
+For larger changes or proposals, please open an issue with your ideas before submitting code.  
+
+## License  
+
+The `tekton-catalog-20240828215145954` repository is licensed under the [Apache License 2.0](LICENSE).  
 
 
-## IBM Cloud Devops Insights related tasks
 
-- **[doi-publish-buildrecord](./devops-insights/README.md#doi-publish-buildrecord)**: This task publishes build record to [DevOps Insights](https://cloud.ibm.com/docs/ContinuousDelivery?topic=ContinuousDelivery-di_working)
-- **[doi-publish-testrecord](./devops-insights/README.md#doi-publish-testrecord)**: This task publishes test record(s) to [DevOps Insights](https://cloud.ibm.com/docs/ContinuousDelivery?topic=ContinuousDelivery-publishing-test-data)
-- **[doi-publish-deployrecord](./devops-insights/README.md#doi-publish-deployrecord)**: This task publishes deploy record to [DevOps Insights](https://cloud.ibm.com/docs/ContinuousDelivery?topic=ContinuousDelivery-di_working)
-- **[doi-evaluate-gate](./devops-insights/README.md#doi-evaluate-gate)**: This task evaluates [DevOps Insights gate policy](https://cloud.ibm.com/docs/ContinuousDelivery?topic=ContinuousDelivery-evaluate-gates-cli)
+---
 
-## Git related tasks
+<div align="center">
 
-- **[git-clone-repo](./git/README.md#git-clone-repo)**: This task fetches the credentials needed to perform a git clone of a repo specified by a [Continuous Delivery toolchain](https://cloud.ibm.com/docs/services/ContinuousDelivery?topic=ContinuousDelivery-toolchains-using) and then uses them to clone the repo.
-- **[git-set-commit-status](./git/README.md#git-set-commit-status)**: This task is setting a git commit status for a given git commit (revision) in a git repository repository integrated in a [Continuous Delivery toolchain](https://cloud.ibm.com/docs/services/ContinuousDelivery?topic=ContinuousDelivery-toolchains-using).
+**[StarlightRetail](https://github.com/StarlightRetail)** — Building the future of retail technology
 
-## IBM Cloud Kubernetes Service related tasks
+Made with :purple_heart: by the StarlightRetail team
 
-- **[iks-fetch-config](./kubernetes-service/README.md#iks-fetch-config)**: This task is fetching the configuration of a [IBM Cloud Kubernetes Service cluster](https://cloud.ibm.com/docs/containers?topic=containers-getting-started) that is required to perform `kubectl` commands.
-- **[iks-contextual-execution](./kubernetes-service/README.md#iks-contextual-execution)**: This task is executing bash snippet/script in the context of a Kubernetes cluster configuration.
-- **[iks-deploy-to-kubernetes](./kubernetes-service/README.md#iks-deploy-to-kubernetes)**: This task allows to perform scripts typically doing deployment of a Kubernetes application with `ibmcloud ks` cli and `kubectl` cli configured for a given cluster.
-
-## Linter related tasks
-- **[linter-docker-lint](./linter/README.md#linter-docker-lint)**: This task performs a lint on the given Dockerfile using [Hadolint](https://hub.docker.com/r/hadolint/hadolint).
-
-## Signing - Docker Content Trust related tasks
-
-- **[signing-dct-init](./signing/dct/README.md#signing-dct-init)**: This task initialize Docker Content Trust GUN/repository
-- **[signing-dct-sign](./signing/dct/README.md#signing-dct-sign)**: This task performs a Docker Content Trust signature on a given image
-- **[signing-dct-enforcement-policy](./signing/dct/README.md#signing-dct-enforcement-policy)**: This task installs [Container Image Security Enforcement](https://cloud.ibm.com/docs/Registry?topic=Registry-security_enforce) on a given cluster.
-
-## Slack related tasks
-
-- **[slack-post-message](./slack/README.md)**: This task posts a message to the Slack channel(s) integrated to your [Continuous Delivery toolchain](https://cloud.ibm.com/docs/services/ContinuousDelivery?topic=ContinuousDelivery-integrations#slack).
-
-## SonarQube related tasks
-
-- **[sonarqube-run-scan](./sonarqube/README.md)**: This task starts a SonarQube scan for the code in a workspace using the SonarQube server integrated to your [Continuous Delivery toolchain](https://cloud.ibm.com/docs/devsecops?topic=ContinuousDelivery-sonarqube).
-
-## Tester related tasks
-
-- **[tester-run-tests](./tester/README.md#tester-run-tests)**: This task allows to invoke a script to execute test.
-
-## Open-Toolchain related tasks
-
-- **[toolchain-build](./toolchain/README.md#toolchain-build)**: This task performs build operation(s) on the given workspace. Default build operations managed are maven build for instance.
-- **[toolchain-extract-value](./toolchain/README.md#toolchain-extract-value)**: This task extracts values from the desired config map with a given jq expression.
-- **[toolchain-publish-deployable-mapping](./toolchain/README.md#toolchain-publish-deployable-mapping)**: This task creates or updates a toolchain deployable mapping for a [Continuous Delivery toolchain](https://cloud.ibm.com/docs/services/ContinuousDelivery?topic=ContinuousDelivery-toolchains-using).
-
-## Breaking Changes
-
-### when moving from tag "tekton_pipeline0.10.1"
-
-- These tasks are using **kebab-case style for EVERY parameters names**. So parameter `pathToContext` (in previous versions of the tasks) has been renamed as `path-to-context`, parameter `clusterName` has been renamed to `cluster-name` and so on...
-- `communication` folder has been renamed to `slack` folder
-- Some tasks has been renamed to match the following name format `<category alias>-<task>` where category alias is depending on the folder containing the tasks:
-
-  | Folder/Category | Category alias |
-  |--------|----------------|
-  | cloudfoundry | cf |
-  | container-registry | icr |
-  | devops-insights | doi |
-  | git | git |
-  | kubernetes-service | iks |
-  | slack | slack |
-  | toolchain | toolchain |
-
-  The task new names are listed in the following table:
-
-  | Folder | Old task name | New task name |
-  |--------|---------------|---------------|
-  | container-registry | containerize-task | icr-containerize |
-  | container-registry | cr-build-task | icr-cr-build |
-  | container-registry | execute-in-dind-task | icr-execute-in-dind |
-  | container-registry | execute-in-dind-cluster-task | icr-execute-in-dind-cluster |
-  | container-registry | vulnerability-advisor-task | icr-check-va-scan |
-  | git | clone-repo-task | git-clone-repo |
-  | git | set-commit-status | git-set-commit-status |
-  | kubernetes-service | fetch-iks-cluster-config | iks-fetch-config |
-  | kubernetes-service | kubernetes-contextual-execution | iks-contextual-execution |
-  | slack | post-slack | slack-post-message |
-
-- Tasks that use workspace(s) may have changed the expected workspace name. Here is the list of the breaking changes for the expected workspace name
-
-  | Folder | Task | Old workspace name | New workspace name | Description |
-  | -- | -- | -- | -- | -- |
-  | container-registry | icr-containerize | workspace | source | A workspace containing the source (Dockerfile, Docker context) to create the image |
-  | container-registry | icr-cr-build | workspace | source | A workspace containing the source (Dockerfile, Docker context) to create the image |
-  | container-registry | icr-execute-in-dind | workspace | source | A workspace containing the source (Dockerfile, Docker context) to create the image |
-  | container-registry | icr-execute-in-dind-cluster | workspace | source | A workspace containing the source (Dockerfile, Docker context) to create the image |
-  | container-registry | icr-check-va-scan | workspace | artifacts | Workspace that may contain image information and will have the va report from the VA scan after this task exection |
-  | git | git-clone-repo | workspace | output | Workspace where the git repository will be cloned into |
-  | git | git-set-commit-status | workspace | artifacts | Workspace that may contain git repository information (ie build.properties). Should be marked as optional when Tekton will permit it |
-  | kubernetes-service | iks-fetch-config | workspace | cluster-configuration | A workspace where the kubernetes cluster config is exported |
-  | kubernetes-service | iks-contextual-execution | workspace | cluster-configuration | A workspace that contain the kubectl cluster config to be used |
-
-### when moving from tag "tekton_pipeline0.10.1" and/or branch "tkn_v1beta1"
-
-- Tasks that are expecting a secret to retrieve apikey and/or secret values have been updated to use the default secret `secure-properties` injected by Continuous Delivery Tekton Pipeline support. The updated tasks are:
-  - icr-check-va-scan
-  - icr-containerize
-  - icr-cr-build
-  - icr-execute-in-dind
-  - icr-execute-in-dind-cluster
-  - git-clone-repo
-  - git-set-commit-status
-  - iks-fetch-config
-
-  Note: As a reminder, in previous version (before `secure-properties` injection by CD tekton support), the default was set to `cd-secret`
-
-## Criteria for Code Submission
-To ensure code quality, protected branches will be enabled soon, and every PR that is to be merged to master will run CI tasks for code quality. These could (and should) be set up for local development environments as well.
-
-Code quality checks currently enabled:
-- yaml lint - using yamllint-rules.yaml as configuration file: `yamllint --config-file yamllint-rules.yaml .`
-- tekton task lint: `tekton-lint '**/*.yaml'`
-- Tasks definition validation: [check_tasks.sh](./.ci/check_tasks.sh)
+</div>
